@@ -56,7 +56,7 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
     """Maximum number of messages to buffer before writing to the database"""
 
     def __init__(self, hostname,\
-                 meaurement_name="test",\
+                 measurement_name="test",\
                  database_file='Model3CAN.dbc',\
                  database='mycar',\
                  user='mycar',\
@@ -71,13 +71,13 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
         super().__init__(file=None)
         self._hostname = hostname
         self._database = database
-        self._meaurement_name = measurement_name
+        self._measurement_name = measurement_name
         self._user = user
         self._password = password
         self._influxdb_host = hostname
         self._stop_running_event = threading.Event()
         self._client = None
-        self._writer_thread = threading.Thread(target=self._db_writer_thread)
+        self._writer_thread = threading.Thread(target=self._influx_writer_thread)
         self._writer_thread.start()
         self.num_frames = 0
         self.last_write = time.time()
@@ -93,8 +93,8 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
         log.debug("Creating sqlite database")
         while True:
                 try:
-                        self._client = InfluxDBClient('701.insi.dev', 38086, 'maximus', 'campari', 'test')
-                        self._client.create_database(self._measurement_name)
+                        self._client = InfluxDBClient(self._hostname, 38086, self._user, self._password, self._database)
+                        self._client.create_database(self._database)
                         break
                 except:
                         log.info("reconnecting in 10")
@@ -110,9 +110,9 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                 msg = self.get_message(self.GET_MESSAGE_TIMEOUT)
                 while msg is not None:
                     # log.debug("SqliteWriter: buffering message")
-                    decoded = self._db.decode_message(message.arbitration_id, message.data)
-                    json_message = self._one_json(self._db.get_message_by_frame_id(message.arbitration_id).name)
-                    json_message["time"] = int(message.timestamp*1000)
+                    decoded = self._db.decode_message(msg.arbitration_id, msg.data)
+                    json_message = self._one_json(self._db.get_message_by_frame_id(msg.arbitration_id).name)
+                    json_message["time"] = int(msg.timestamp*1000)
                     json_message["fields"].update(decoded)
                     messages.append(json_message)
                     if (
@@ -126,18 +126,17 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
 
                 count = len(messages)
                 if count > 0:
-                    with self._client:
-                        # log.debug("Writing %d frames to db", count)
-                        try:
-                            client.write_points(json_body)
-                        except ifxexcept.InfluxDBClientError:
-                            #print(str(message))
-                            #print(message.timestamp)
-                            print(str(json_body))
-                            traceback.print_exc()
-                        except ifxexcept.InfluxDBServerError:
-                            client.close()
-                            self._connect()
+                    # log.debug("Writing %d frames to db", count)
+                    try:
+                        self._client.write_points(messages)
+                    except ifxexcept.InfluxDBClientError:
+                        #print(str(message))
+                        #print(message.timestamp)
+                        print(str(messages))
+                        traceback.print_exc()
+                    except ifxexcept.InfluxDBServerError:
+                        self._client.close()
+                        self._connect()
 
                     self.num_frames += count
                     self.last_write = time.time()

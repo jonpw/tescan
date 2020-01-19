@@ -7,8 +7,9 @@ hostname = '701.insi.dev'
 vehicle = 'maximus'
 user = vehicle
 password = 'campari'
+database_file='model3dbc/Model3CAN.dbc'
 
-listener = InfluxWriter(hostname, database=vehicle, measurement=vehicle, user=user, password=password)
+listener = InfluxWriter(hostname, database=vehicle, measurement_name=vehicle, user=user, password=password, database_file=database_file)
 
 while True:
         message = bus.recv()
