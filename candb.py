@@ -1,5 +1,5 @@
 import can
-import influx
+from influx import InfluxWriter
 
 bus = can.Bus(bustype='socketcan', channel='vcan0', bitrate=500000, receive_own_messages=True)
 
