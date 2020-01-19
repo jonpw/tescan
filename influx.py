@@ -15,7 +15,7 @@ import time
 import traceback
 from can.listener import BufferedReader
 from can.message import Message
-from .generic import BaseIOHandler
+from can.io.generic import BaseIOHandler
 
 log = logging.getLogger("can.io.influxdb")
 
