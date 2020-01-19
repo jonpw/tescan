@@ -19,7 +19,7 @@ from .generic import BaseIOHandler
 
 log = logging.getLogger("can.io.influxdb")
 
-class SqliteWriter(BaseIOHandler, BufferedReader):
+class InfluxWriter(BaseIOHandler, BufferedReader):
     """Writes decoded CAN bus data to an InfluxDB server
     The database will be created when connecting
     Messages are internally buffered and written in a background
@@ -55,7 +55,12 @@ class SqliteWriter(BaseIOHandler, BufferedReader):
     MAX_BUFFER_SIZE_BEFORE_WRITES = 500
     """Maximum number of messages to buffer before writing to the database"""
 
-    def __init__(self, hostname, meaurement_name="test", database_file='Model3CAN.dbc', database='mycar', user='mycar', password='mycar'):
+    def __init__(self, hostname,\
+                 meaurement_name="test",\
+                 database_file='Model3CAN.dbc',\
+                 database='mycar',\
+                 user='mycar',\
+                 password='mycar'):
         """
         :param file: a `str` or since Python 3.7 a path like object that points
                      to the database file to use
@@ -121,18 +126,18 @@ class SqliteWriter(BaseIOHandler, BufferedReader):
 
                 count = len(messages)
                 if count > 0:
-                        with self._client:
-                                # log.debug("Writing %d frames to db", count)
-                                try:
-                                        client.write_points(json_body)
-                                except ifxexcept.InfluxDBClientError:
-                                        #print(str(message))
-                                        #print(message.timestamp)
-                                        print(str(json_body))
-                                        traceback.print_exc()
-                                except ifxexcept.InfluxDBServerError:
-                                        client.close()
-                                        self._connect()
+                    with self._client:
+                        # log.debug("Writing %d frames to db", count)
+                        try:
+                            client.write_points(json_body)
+                        except ifxexcept.InfluxDBClientError:
+                            #print(str(message))
+                            #print(message.timestamp)
+                            print(str(json_body))
+                            traceback.print_exc()
+                        except ifxexcept.InfluxDBServerError:
+                            client.close()
+                            self._connect()
 
                     self.num_frames += count
                     self.last_write = time.time()
