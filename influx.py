@@ -115,7 +115,7 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                     try:
                         decoded = self._db.decode_message(msg.arbitration_id, msg.data)
                     except:
-                        print('not found in db')
+                        log.info("not found in db: "+str(msg.arbitration_id))
                         break
                     json_message = self._one_json(self._db.get_message_by_frame_id(msg.arbitration_id).name)
                     json_message["time"] = int(msg.timestamp*1000)
