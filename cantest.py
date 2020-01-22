@@ -6,7 +6,7 @@ import time
 import random
 
 bus = can.Bus(bustype='socketcan', channel='vcan0', bitrate=500000, receive_own_messages=True)
-db = cantools.database.load_file('Model3CAN.dbc')
+db = cantools.database.load_file('model3dbc/Model3CAN.dbc')
 messages = db.messages
 
 while True:
