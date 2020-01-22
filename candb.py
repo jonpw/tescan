@@ -11,7 +11,7 @@ database_file='model3dbc/Model3CAN.dbc'
 sqlitefile = '/var/lib/tescan/canbus.sqlite'
 
 influxwriter = InfluxWriter(hostname, database=vehicle, measurement_name=vehicle, user=user, password=password, database_file=database_file)
-printer = can.printer()
+printer = can.Printer()
 sqlitewriter = can.SqliteWriter(sqlitefile, table_name=vehicle)
 
 while True:
