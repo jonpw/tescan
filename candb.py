@@ -8,9 +8,14 @@ vehicle = 'maximus'
 user = vehicle
 password = 'campari'
 database_file='model3dbc/Model3CAN.dbc'
+sqlitefile = '/var/lib/tescan/canbus.sqlite'
 
-listener = InfluxWriter(hostname, database=vehicle, measurement_name=vehicle, user=user, password=password, database_file=database_file)
+influxwriter = InfluxWriter(hostname, database=vehicle, measurement_name=vehicle, user=user, password=password, database_file=database_file)
+printer = can.printer()
+sqlitewriter = can.SqliteWriter(sqlitefile, table_name=vehicle)
 
 while True:
         message = bus.recv()
-        listener(message)
+        influxwriter(message)
+        printer(message)
+        sqlitewriter(message)

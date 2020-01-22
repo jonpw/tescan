@@ -99,6 +99,7 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                 except:
                         log.info("reconnecting in 10")
                         time.sleep(10)
+        print('connected to '+str(self._hostname))
 
     def _influx_writer_thread(self):
         self._connect()
@@ -108,9 +109,14 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                 messages = []  # reset buffer
 
                 msg = self.get_message(self.GET_MESSAGE_TIMEOUT)
+                #print(str(msg))
                 while msg is not None:
                     # log.debug("SqliteWriter: buffering message")
-                    decoded = self._db.decode_message(msg.arbitration_id, msg.data)
+                    try:
+                        decoded = self._db.decode_message(msg.arbitration_id, msg.data)
+                    except:
+                        print('not found in db')
+                        break
                     json_message = self._one_json(self._db.get_message_by_frame_id(msg.arbitration_id).name)
                     json_message["time"] = int(msg.timestamp*1000)
                     json_message["fields"].update(decoded)
