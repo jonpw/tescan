@@ -9,13 +9,13 @@ import time
 import threading
 import logging
 import cantools
-from influxdb import InfluxDBClient
-from influxdb import exceptions as ifxexcept
+import mqtt
 import time
 import traceback
 from can.listener import BufferedReader
 from can.message import Message
 from can.io.generic import BaseIOHandler
+import paho.mqtt.client as mqtt
 
 log = logging.getLogger("can.io.influxdb")
 
@@ -56,9 +56,8 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
     """Maximum number of messages to buffer before writing to the database"""
 
     def __init__(self, hostname,\
-                 measurement_name="test",\
                  database_file='Model3CAN.dbc',\
-                 database='mycar',\
+                 vehicle='mycar',\
                  user='mycar',\
                  password='mycar'):
         """
@@ -76,10 +75,9 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
         self._password = password
         self._stop_running_event = threading.Event()
         self._client = None
-        self._writer_thread = threading.Thread(target=self._influx_writer_thread)
+        self._writer_thread = threading.Thread(target=self._mqtt_publisher_thread)
         self._writer_thread.start()
-        self.num_frames = 0
-        self.last_write = time.time()        
+        self.num_frames = 0      
         self._db = cantools.database.load_file(database_file)
 
     def _connect(self):
@@ -96,6 +94,8 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                         self._client.on_disconnect = self._on_disconnect
                         self._client.on_message = self._on_message
                         self._client.username_pw_set(username=self._user, password=self._password)
+                        self._client.reconnect_delay_set(min_delay=1, max_delay=120)
+                        self._client.will_set('/'.join([self._topic_prefix, 'status']), payload='timeout', qos=0, retain=True)
                         self._client.connect(self._hostname, port=1883)
                         break
                 except:
@@ -104,6 +104,7 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
 
     def _on_connect(self, client, userdata, flags, rc):
         print("Connection returned result: "+connack_string(rc))
+        retval = self._client.publish('/'.join([self._topic_prefix, 'status']), payload='running', qos=0, retain=True)
 
     def _on_disconnect(self, client, userdata, rc):
         if rc != 0:
@@ -113,7 +114,7 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
         print("Received message '" + str(message.payload) + "' on topic '"
             + message.topic + "' with QoS " + str(message.qos))
 
-    def _influx_writer_thread(self):
+    def _mqtt_publisher_thread(self):
         self._connect()
 
         try:
@@ -124,48 +125,29 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                 #print(str(msg))
                 while msg is not None:
                     # log.debug("SqliteWriter: buffering message")
+                    msgname = self._db.get_message_by_frame_id(msg.arbitration_id).name
                     try:
                         decoded = self._db.decode_message(msg.arbitration_id, msg.data)
                     except:
                         log.info("not found in db: "+str(msg.arbitration_id))
                         break
-                    json_message = self._one_json(self._db.get_message_by_frame_id(msg.arbitration_id).name)
-                    json_message["time"] = int(msg.timestamp*1000)
-                    json_message["fields"].update(decoded)
-                    messages.append(json_message)
-                    if (
-                        time.time() - self.last_write > self.MAX_TIME_BETWEEN_WRITES
-                        or len(messages) > self.MAX_BUFFER_SIZE_BEFORE_WRITES
-                    ):
-                        break
-                    else:
-                        # just go on
-                        msg = self.get_message(self.GET_MESSAGE_TIMEOUT)
-
-                count = len(messages)
-                if count > 0:
-                    # log.debug("Writing %d frames to db", count)
-                    try:
-                        self._client.write_points(messages)
-                    except ifxexcept.InfluxDBClientError:
-                        #print(str(message))
-                        #print(message.timestamp)
-                        print(str(messages))
-                        traceback.print_exc()
-                    except ifxexcept.InfluxDBServerError:
-                        self._client.close()
-                        self._connect()
-
-                    self.num_frames += count
-                    self.last_write = time.time()
+                    for signal in decoded:
+                        try:
+                            retval = self._client.publish('/'.join([self._topic_prefix, msgname, signal]), payload=decoded[signal], qos=0, retain=False)
+                            if (retval.rc == mqtt.MQTT_ERR_SUCCESS):
+                                self.num_frames += 1
+                            elif (retval.rc == mqtt.ERR_NO_CONN):
+                                self._connect() #message lost?
+                            else:
+                                print('pub failed with'+str(rc))
 
                 # check if we are still supposed to run and go back up if yes
                 if self._stop_running_event.is_set():
                     break
 
         finally:
-            self._client.close()
-            log.info("Stopped influxdb writer after writing %d messages", self.num_frames)
+            self._client.disconnect()
+            log.info("Stopped mqtt publisher after writing %d messages", self.num_frames)
 
     def stop(self):
         """Stops the reader an writes all remaining messages to the database. Thus, this
