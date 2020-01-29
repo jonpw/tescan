@@ -19,7 +19,7 @@ import paho.mqtt.client as mqtt
 
 log = logging.getLogger("can.io.influxdb")
 
-class InfluxWriter(BaseIOHandler, BufferedReader):
+class MqttWriter(BaseIOHandler, BufferedReader):
     """Writes decoded CAN bus data to an InfluxDB server
     The database will be created when connecting
     Messages are internally buffered and written in a background
@@ -45,15 +45,6 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
         :attr:`~can.SqliteWriter.MAX_BUFFER_SIZE_BEFORE_WRITES` messages are buffered.
     .. note:: The database schema is given in the documentation of the loggers.
     """
-
-    GET_MESSAGE_TIMEOUT = 0.25
-    """Number of seconds to wait for messages from internal queue"""
-
-    MAX_TIME_BETWEEN_WRITES = 5.0
-    """Maximum number of seconds to wait between writes to the database"""
-
-    MAX_BUFFER_SIZE_BEFORE_WRITES = 500
-    """Maximum number of messages to buffer before writing to the database"""
 
     def __init__(self, hostname,\
                  database_file='Model3CAN.dbc',\

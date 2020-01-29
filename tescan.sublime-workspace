@@ -1,0 +1,744 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"m_pend",
+				"m_pending_type"
+			],
+			[
+				"i",
+				"i"
+			],
+			[
+				"nrf_tra",
+				"nrf_spi_mngr_transaction_t"
+			],
+			[
+				"m_hv",
+				"m_hvac_off"
+			],
+			[
+				"VANN",
+				"VANNE_AUTO"
+			],
+			[
+				"HvacMode_t",
+				"HvacMode_t"
+			],
+			[
+				"out",
+				"output_ready"
+			],
+			[
+				"bsec_record",
+				"bsec_record_desc"
+			],
+			[
+				"numb",
+				"number_of_transfers"
+			],
+			[
+				"bme",
+				"bme_spi_config"
+			],
+			[
+				"HVAC_MIT",
+				"HVAC_MITSUBISHI_ONE_SPACE"
+			],
+			[
+				"uint",
+				"uint8_t"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52/main.c",
+			"settings":
+			{
+				"buffer_size": 21723,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/ProgramData/Git/config",
+			"settings":
+			{
+				"buffer_size": 272,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "influx.py",
+			"settings":
+			{
+				"buffer_size": 7111,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "mqtt-listener.py",
+			"settings":
+			{
+				"buffer_size": 7082,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "candb.py",
+			"settings":
+			{
+				"buffer_size": 664,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "testasc.py",
+			"settings":
+			{
+				"buffer_size": 397,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "import can"
+			}
+		},
+		{
+			"file": "cantest.py",
+			"settings":
+			{
+				"buffer_size": 1723,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/Jon/Documents/Model3CAN.dbc",
+			"settings":
+			{
+				"buffer_size": 64428,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "canmqtt.py",
+			"settings":
+			{
+				"buffer_size": 1841,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Jon/Documents/candb/tescan"
+	],
+	"file_history":
+	[
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52/pca145365.h",
+		"/C/Users/Jon/Documents/candb/candb.py",
+		"/C/Users/Jon/Documents/candb/cantest.py",
+		"/C/Users/Jon/Documents/candb/canmqtt.py",
+		"/E/wpa_supplicant.conf",
+		"/N/work/Industrea/IND04-IVU CASplus Next Gen IVU/Phase 3 Design output/03 Hardware/STT FPC/36183.PrjPCB",
+		"/C/Users/Jon/Dropbox/sensor/panel.csv",
+		"/C/Users/Jon/Dropbox/sensor/BOM-145365.csv",
+		"/C/Users/Jon/Dropbox/sensor/BOM-723707.csv",
+		"/C/Users/Jon/Dropbox/sensor/BOM-832946.csv",
+		"/C/Users/Jon/Dropbox/sensor/BOM-30464.csv",
+		"/C/Users/Jon/Dropbox/sensor/BOM-35000.csv",
+		"/C/Users/Jon/Dropbox/sensor/ToOrder.csv",
+		"/C/Users/Jon/Dropbox/sensor/PanelBOM.csv",
+		"/N/docker-storage/gitea.yml",
+		"/C/Users/Jon/Downloads/nRF5_SDK_15.3.0_59ac345/nRF5_SDK_15.3.0_59ac345/examples/ble_peripheral/ble_app_eddystone/main.c",
+		"/C/Users/Jon/Dropbox/sensor/USBsense/Project Outputs/temp/787598-panel.TXT",
+		"/C/Users/Jon/Downloads/future.csv",
+		"/C/Users/Jon/Downloads/mouser.csv",
+		"/C/Program Files/Telegraf/telegraf.conf",
+		"/C/Users/Jon/Downloads/zephyr/samples/net/syslog_net/README.rst",
+		"/C/Users/Jon/Documents/Corsair_Link_20190520_12_46_08.csv",
+		"/C/Users/Jon/Downloads/nRF5_SDK_15.3.0_59ac345/nRF5_SDK_15.3.0_59ac345/examples/ble_peripheral/ble_app_proximity/findMeMasterServer.ncs",
+		"/C/Users/Jon/Downloads/nRF5_SDK_15.3.0_59ac345/nRF5_SDK_15.3.0_59ac345/examples/ble_peripheral/ble_app_proximity/main.c",
+		"/C/Users/Jon/Downloads/zephyr/samples/net/mqtt_publisher/README.rst",
+		"/C/Users/Jon/Downloads/zephyr/samples/net/google_iot_mqtt/README.rst",
+		"/C/Users/Jon/Downloads/zephyr/samples/net/google_iot_mqtt/src/dhcp.c",
+		"/C/Users/Jon/Downloads/zephyr/samples/net/google_iot_mqtt/src/dhcp.h",
+		"/C/Users/Jon/Downloads/zephyr/samples/net/google_iot_mqtt/src/globalsign.inc",
+		"/C/Users/Jon/Downloads/zephyr/samples/net/google_iot_mqtt/src/main.c",
+		"/C/Users/Jon/Downloads/zephyr/samples/net/google_iot_mqtt/src/protocol.c",
+		"/C/Users/Jon/Downloads/zephyr/samples/bluetooth/ipsp/README.rst",
+		"/C/Users/Jon/Downloads/zephyr/samples/bluetooth/central/README.rst",
+		"/C/Users/Jon/Downloads/zephyr/samples/bluetooth/central/src/main.c",
+		"/C/Users/Jon/Downloads/zephyr/samples/bluetooth/central_hr/README.rst",
+		"/C/Users/Jon/Downloads/zephyr/samples/bluetooth/central_hr/src/main.c",
+		"/C/Users/Jon/Downloads/zephyr/samples/bluetooth/ipsp/prj.conf",
+		"/C/Users/Jon/Downloads/zephyr/samples/bluetooth/ipsp/sample.yaml",
+		"/C/Users/Jon/Downloads/zephyr/samples/bluetooth/ipsp/prj_zep1656.conf",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/N/work/Industrea/IND04-IVU CASplus Next Gen IVU/Phase 3 Design output/03 Hardware/A/30382.PrjPCB",
+		"/C/Users/Jon/Downloads/arrow.csv",
+		"/C/Users/Jon/Downloads/digikey.csv",
+		"/N/docker-storage/test.yml",
+		"/C/Users/Jon/Dropbox/sensor/832946.csv",
+		"/C/Users/Jon/Dropbox/sensor/35000.csv",
+		"/C/Users/Jon/Dropbox/sensor/145365.csv",
+		"/C/Users/Jon/Dropbox/sensor/723707.csv",
+		"/C/Users/Jon/Dropbox/sensor/30464.csv",
+		"/C/Sites/blog/app/views/articles/new.html.erb",
+		"/C/Users/Jon/Downloads/MultiMC/serverfiles/All+the+Mods+3+Remix-v1.0.1-Serverfiles-FULL/LICENSE.md",
+		"/C/Sites/blog/config/routes.rb",
+		"/C/Sites/blog/app/controllers/articles_controller.rb",
+		"/C/Users/Jon/Downloads/MultiMC/serverfiles/All+the+Mods+3+Remix-v1.0.1-Serverfiles-FULL/config/packmode.cfg",
+		"/C/Users/Jon/Downloads/MultiMC/instances/All-the-Mods-3---Remix-1.0.1/minecraft/config/packmode.cfg",
+		"/C/Users/Jon/Downloads/MultiMC/serverfiles/All+the+Mods+3+Remix-v1.0.1-Serverfiles-FULL/eula.txt",
+		"/C/Users/Jon/Downloads/MultiMC/serverfiles/All+the+Mods+3+Remix-v1.0.1-Serverfiles-FULL/settings.cfg",
+		"/C/Users/Jon/Downloads/MultiMC/serverfiles/All+the+Mods+3+Remix-v1.0.1-Serverfiles-FULL/server.properties",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52sdk/external/segger_rtt/SEGGER_RTT.h",
+		"/C/Users/Jon/Documents/workspace/test/test/README.md",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52/Dockerfile",
+		"/C/Users/Jon/Documents/workspace/test/test/Jenkinsfile",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52/config/sdk_config.h",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52sdk/external/protothreads/pt-1.4/README",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52sdk/external/protothreads/nrf_pt.h",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52/custom_board.h",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/VL53L0X_1.0.2/ApiExample/examples/src/vl53l0x_ContinuousRanging_Example.c",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52/pca252432.h",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52/pca662504.h",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52sdk/external/lwip/src/include/lwip/nd6.h",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52sdk/external/lwip/src/include/lwip/netif.h",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52sdk/components/drivers_ext/tls/mbedtls/tls/config/nrf_tls_config.h",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52sdk/components/drivers_ext/tls/nrf_tls.h",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52sdk/external/lwip/src/port/arch/lwipopts.h",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52sdk/external/lwip/src/port/nrf_platform_port.c",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52sdk/external/lwip/src/core/dns.c",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52sdk/external/lwip/src/port/nrf_platform_port.h",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52sdk/external/lwip/src/include/lwip/opt.h",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52sdk/components/toolchain/gcc/nrf5x_common.ld",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52/iot_lwip_mqtt_publisher_gcc_nrf52.ld",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52sdk/components/drivers_nrf/pwm/nrf_drv_pwm.c",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52/Makefile",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52/mqttapp.h",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52/BME680_driver/bme680_defs.h",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52/BME680_driver/bme680.h",
+		"/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52/BME680_driver/bme680.c",
+		"/C/Users/Jon/zephyr/samples/bluetooth/scan_adv/src/main.c",
+		"/C/Users/Jon/zephyr/drivers/can/stm32_can.c",
+		"/C/Users/Jon/zephyr/samples/drivers/CAN/src/main.c",
+		"/C/Users/Jon/zephyr/samples/nfc/nfc_hello/src/main.c",
+		"/C/Users/Jon/zephyr/samples/net/wifi/src/wifi_test.c",
+		"/C/Users/Jon/zephyr/samples/net/mqtt_publisher/src/main.c",
+		"/C/Users/Jon/zephyr/samples/net/rpl_border_router/src/coap.c",
+		"/C/Users/Jon/zephyr/samples/net/rpl_border_router/src/shell.c",
+		"/C/Users/Jon/zephyr/samples/net/rpl_border_router/src/rpl.c",
+		"/C/Users/Jon/zephyr/samples/net/rpl_border_router/src/main.c",
+		"/C/Users/Jon/zephyr/samples/bluetooth/central/src/main.c",
+		"/C/Users/Jon/zephyr/samples/bluetooth/beacon/src/main.c",
+		"/C/Users/Jon/zephyr/samples/bluetooth/eddystone/src/main.c",
+		"/C/Users/Jon/zephyr/boards/arm/nrf52840_pca10059/board.h",
+		"/C/Users/Jon/zephyr/boards/arm/nrf52840_pca10059/nrf52840_pca10059_defconfig",
+		"/C/Users/Jon/zephyr/boards/arm/nrf52840_pca10059/nrf52840_pca10059.yaml",
+		"/C/Users/Jon/zephyr/boards/arm/nrf52840_pca10059/nrf52840_pca10059.dts",
+		"/C/Users/Jon/zephyr/soc/arm/nordic_nrf/nrf52/dts.fixup",
+		"/C/Users/Jon/zephyr/soc/arm/nordic_nrf/nrf52/soc.h",
+		"/C/Users/Jon/zephyr/soc/arm/nordic_nrf/nrf52/soc.c",
+		"/C/Users/Jon/zephyr/samples/bluetooth/hci_usb/build/nrf52840_pca10059/CMakeFiles/CMakeOutput.log",
+		"/C/Users/Jon/zephyr/samples/bluetooth/hci_usb/build/nrf52840_pca10059/CMakeFiles/CMakeError.log",
+		"/C/Users/Jon/zephyr/include/arch/arm/cortex_m/scripts/linker.ld",
+		"/C/Users/Jon/zephyr/soc/arm/nordic_nrf/nrf52/linker.ld",
+		"/C/Users/Jon/zephyr/boards/arm/nrf52840_pca10059/board.c",
+		"/C/Program Files/Telegraf/telegraf3.conf",
+		"/C/Program Files/Telegraf/telegraf2.conf",
+		"/C/Sites/blog/app/views/welcome/index.html.erb",
+		"/C/Users/Jon/Documents/Corsair_Link_20180830_22_23_05.csv",
+		"/C/Users/Jon/Documents/workspace/sdk/nRF5_SDK_15.2.0_9412b96/nRF5_SDK_15.2.0_9412b96/components/toolchain/gcc/Makefile.posix",
+		"/C/Users/Jon/Documents/workspace/sdk/nRF5_SDK_15.2.0_9412b96/nRF5_SDK_15.2.0_9412b96/components/toolchain/gcc/Makefile.windows",
+		"/C/Users/Jon/Documents/workspace/sdk/nRF5_SDK_15.2.0_9412b96/nRF5_SDK_15.2.0_9412b96/components/toolchain/gcc/Makefile.common",
+		"/C/Users/Jon/Documents/jenkinsd2/jenkins-slave/files/resolv.conf",
+		"/C/Users/Jon/zephyr/samples/bluetooth/ipsp/src/main.c",
+		"/C/Users/Jon/Downloads/MultiMC/instances/All+the+Mods+3-v5.9.8d/minecraft/journeymap/server/5.5/journeymap.server.dim0.config",
+		"/C/Users/Jon/Downloads/MultiMC/serverfiles/serverfiles/eula.txt",
+		"/C/Users/Jon/Downloads/MultiMC/serverfiles/serverfiles/settings.cfg",
+		"/C/Users/Jon/Downloads/MultiMC/serverfiles/serverfiles/README.md",
+		"/C/Users/Jon/Downloads/MultiMC/serverfiles/serverfiles/LICENSE.md",
+		"/C/Users/Jon/Downloads/MultiMC/instances/All+the+Mods+3-v5.9.8d/minecraft/config/packmode.cfg",
+		"/C/Users/Jon/Downloads/MultiMC/instances/All+the+Mods+3-v5.9.8d/minecraft/config/recipehandler.cfg",
+		"/C/Users/Jon/Downloads/MultiMC/instances/All+the+Mods+3-v5.9.8d/minecraft/config/ftblib.cfg"
+	],
+	"find":
+	{
+		"height": 40.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": true,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/C/Users/Jon/Documents/jenkinsd2/nrf52/nrf52/main.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 21723,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 7142.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/ProgramData/Git/config",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 272,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								23,
+								23
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": false,
+							"syntax": "Packages/Git Formats/Git Config.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "influx.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7111,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5428,
+								5428
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 8,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1622.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "mqtt-listener.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7082,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4562,
+								4562
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1406.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "candb.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 664,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								664,
+								664
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "testasc.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 397,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								381,
+								381
+							]
+						],
+						"settings":
+						{
+							"auto_name": "import can",
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "cantest.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1723,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1085,
+								1085
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 8,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/C/Users/Jon/Documents/Model3CAN.dbc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 64428,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								20623,
+								20623
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 6007.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 2,
+					"file": "influx.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7111,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2448,
+								2448
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 8,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 47.0,
+						"translation.y": 1653.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "canmqtt.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1841,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 8,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 57.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Makefile/Make.sublime-build",
+	"project": "tescan.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 285.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
