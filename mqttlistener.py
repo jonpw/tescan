@@ -68,10 +68,10 @@ class MqttWriter(BaseIOHandler, BufferedReader):
         self._password = password
         self._stop_running_event = threading.Event()
         self._client = None
+        self._db = cantools.database.load_file(database_file) 
+        self.num_frames = 0                
         self._writer_thread = threading.Thread(target=self._mqtt_publisher_thread)
         self._writer_thread.start()
-        self.num_frames = 0      
-        self._db = cantools.database.load_file(database_file)
 
     def _connect(self):
         """Creates a new databae or opens a connection to an existing one.
