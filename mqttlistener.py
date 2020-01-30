@@ -109,6 +109,7 @@ class MqttWriter(BaseIOHandler, BufferedReader):
             + message.topic + "' with QoS " + str(message.qos))
 
     def _mqtt_publisher_thread(self):
+        self._client.loop_start()
         self._connect()
 
         try:
