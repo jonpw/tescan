@@ -131,7 +131,8 @@ class MqttWriter(BaseIOHandler, BufferedReader):
                                 self._connect() #message lost?
                             else:
                                 print('pub failed with'+str(rc))
-
+                        except:
+                            print('exception in publish')
                 # check if we are still supposed to run and go back up if yes
                 if self._stop_running_event.is_set():
                     break
