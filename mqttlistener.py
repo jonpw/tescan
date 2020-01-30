@@ -82,7 +82,7 @@ class MqttWriter(BaseIOHandler, BufferedReader):
         print("MQTTWriter connecting to "+self._hostname)
         while True:
                 try:
-                        self._client = mqtt.Client(clientid=self._clientid)
+                        self._client = mqtt.Client(clientid=self._client_id)
                         self._client.on_connect = self._on_connect
                         self._client.on_disconnect = self._on_disconnect
                         self._client.on_message = self._on_message
