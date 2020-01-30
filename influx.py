@@ -77,12 +77,12 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
         self._influxdb_host = hostname
         self._stop_running_event = threading.Event()
         self._client = None
-        self._writer_thread = threading.Thread(target=self._influx_writer_thread)
-        self._writer_thread.start()
+        self._db = cantools.database.load_file(database_file)
         self.num_frames = 0
         self.last_write = time.time()
-        self._one_json = lambda message:{ "measurement": self._measurement_name, "tags": {"message": message}, "time": None, "fields": {}}
-        self._db = cantools.database.load_file(database_file)
+        self._one_json = lambda message:{ "measurement": self._measurement_name, "tags": {"message": message}, "time": None, "fields": {}}        
+        self._writer_thread = threading.Thread(target=self._influx_writer_thread)
+        self._writer_thread.start()
 
     def _connect(self):
         """Creates a new databae or opens a connection to an existing one.
