@@ -79,7 +79,7 @@ class MqttWriter(BaseIOHandler, BufferedReader):
             You can't share sqlite3 connections between threads (by default)
             hence we setup the db here. It has the upside of running async.
         """
-        log.debug("Connecting")
+        print("MQTTWriter connecting to "+self._hostname)
         while True:
                 try:
                         self._client = mqtt.Client(clientid=self._clientid)
