@@ -9,7 +9,6 @@ import time
 import threading
 import logging
 import cantools
-import mqtt
 import time
 import traceback
 from can.listener import BufferedReader
