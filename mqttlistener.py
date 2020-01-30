@@ -95,7 +95,8 @@ class MqttWriter(BaseIOHandler, BufferedReader):
                         self._client.connect(self._hostname, port=31883)
                         break
                 except:
-                        log.info("reconnecting in 10")
+                        print("reconnecting in 10")
+                        traceback.print_exc()
                         time.sleep(10)
         self._client.loop_start()                                                
         print('MQTTWriter connected to '+self._hostname)
