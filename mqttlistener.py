@@ -120,25 +120,28 @@ class MqttWriter(BaseIOHandler, BufferedReader):
         try:
             while True:
                 msg = self.get_message(self.GET_MESSAGE_TIMEOUT)
-                msgname = self._db.get_message_by_frame_id(msg.arbitration_id).name
-                try:
-                    decoded = self._db.decode_message(msg.arbitration_id, msg.data)
-                except:
-                    log.info("not found in db: "+str(msg.arbitration_id))
-                    traceback.print_exc()
-                    break
-                for signal in decoded:
+                while msg is not None:
+                    msgname = self._db.get_message_by_frame_id(msg.arbitration_id).name
                     try:
-                        retval = self._client.publish('/'.join([self._topic_prefix, msgname, signal]), payload=decoded[signal], qos=0, retain=False)
-                        if (retval.rc == mqtt.MQTT_ERR_SUCCESS):
-                            self.num_frames += 1
-                        elif (retval.rc == mqtt.ERR_NO_CONN):
-                            self._connect() #message lost?
-                        else:
-                            print('pub failed with'+str(rc))
+                        decoded = self._db.decode_message(msg.arbitration_id, msg.data)
                     except:
-                        print('exception in publish')
+                        log.info("not found in db: "+str(msg.arbitration_id))
                         traceback.print_exc()
+                        break
+                    for signal in decoded:
+                        try:
+                            retval = self._client.publish('/'.join([self._topic_prefix, msgname, signal]), payload=decoded[signal], qos=0, retain=False)
+                            if (retval.rc == mqtt.MQTT_ERR_SUCCESS):
+                                self.num_frames += 1
+                            elif (retval.rc == mqtt.ERR_NO_CONN):
+                                self._connect() #message lost?
+                            else:
+                                print('pub failed with'+str(rc))
+                            break
+                        except:
+                            print('exception in publish')
+                            traceback.print_exc()
+                            break
                 # check if we are still supposed to run and go back up if yes
                 if self._stop_running_event.is_set():
                     break
