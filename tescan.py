@@ -14,7 +14,7 @@ sqlitefile = '/var/lib/tescan/canbus.sqlite'
 influxwriter = InfluxWriter(hostname, database=vehicle, measurement_name=vehicle, user=user, password=password, database_file=database_file)
 printer = can.Printer()
 sqlitewriter = can.SqliteWriter(sqlitefile, table_name=vehicle)
-mqttwriter = MqttWriter(hostname, vehicle=vehicle, user=user, password=password)
+mqttwriter = MqttWriter(hostname, vehicle=vehicle, user=user, password=password, database_file=database_file)
 
 while True:
     message = bus.recv()
