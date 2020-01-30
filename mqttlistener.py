@@ -119,16 +119,13 @@ class MqttWriter(BaseIOHandler, BufferedReader):
 
         try:
             while True:
-                messages = []  # reset buffer
-
                 msg = self.get_message(self.GET_MESSAGE_TIMEOUT)
-                #print(str(msg))
-
                 msgname = self._db.get_message_by_frame_id(msg.arbitration_id).name
                 try:
                     decoded = self._db.decode_message(msg.arbitration_id, msg.data)
                 except:
                     log.info("not found in db: "+str(msg.arbitration_id))
+                    traceback.print_exc()
                     break
                 for signal in decoded:
                     try:
@@ -141,11 +138,13 @@ class MqttWriter(BaseIOHandler, BufferedReader):
                             print('pub failed with'+str(rc))
                     except:
                         print('exception in publish')
+                        traceback.print_exc()
                 # check if we are still supposed to run and go back up if yes
                 if self._stop_running_event.is_set():
                     break
         except:
             print('mqtt_publisher_thread: exception')
+            traceback.print_exc()
         finally:
             self._client.disconnect()
             log.info("Stopped mqtt publisher after writing %d messages", self.num_frames)
