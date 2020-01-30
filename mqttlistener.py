@@ -83,6 +83,7 @@ class MqttWriter(BaseIOHandler, BufferedReader):
         while True:
                 try:
                         self._client = mqtt.Client(clientid=self._clientid)
+                        self._client.loop_start()                        
                         self._client.on_connect = self._on_connect
                         self._client.on_disconnect = self._on_disconnect
                         self._client.on_message = self._on_message
@@ -109,7 +110,7 @@ class MqttWriter(BaseIOHandler, BufferedReader):
             + message.topic + "' with QoS " + str(message.qos))
 
     def _mqtt_publisher_thread(self):
-        self._client.loop_start()
+
         self._connect()
 
         try:
