@@ -2,7 +2,7 @@ import can
 from influx import InfluxWriter
 from mqttlistener import MqttWriter
 
-bus = can.Bus(bustype='socketcan', channel='vcan0', bitrate=500000, receive_own_messages=True)
+bus = can.Bus(bustype='socketcan', channel='vcan0', bitrate=500000, receive_own_messages=True, listen_only=True)
 
 hostname = '701.insi.dev'
 vehicle = 'maximus'

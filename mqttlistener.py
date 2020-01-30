@@ -87,7 +87,7 @@ class MqttWriter(BaseIOHandler, BufferedReader):
                         self._client.username_pw_set(username=self._user, password=self._password)
                         self._client.reconnect_delay_set(min_delay=1, max_delay=120)
                         self._client.will_set('/'.join([self._topic_prefix, 'status']), payload='timeout', qos=0, retain=True)
-                        self._client.connect(self._hostname, port=1883)
+                        self._client.connect(self._hostname, port=31883)
                         break
                 except:
                         log.info("reconnecting in 10")
