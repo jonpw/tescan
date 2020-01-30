@@ -83,18 +83,19 @@ class MqttWriter(BaseIOHandler, BufferedReader):
         while True:
                 try:
                         self._client = mqtt.Client(clientid=self._clientid)
-                        self._client.loop_start()                        
                         self._client.on_connect = self._on_connect
                         self._client.on_disconnect = self._on_disconnect
                         self._client.on_message = self._on_message
+                        self._client.on_log = lambda mqttc, obj, level, string: print(string)
                         self._client.username_pw_set(username=self._user, password=self._password)
                         self._client.reconnect_delay_set(min_delay=1, max_delay=120)
-                        self._client.will_set('/'.join([self._topic_prefix, 'status']), payload='timeout', qos=0, retain=True)
+                        #self._client.will_set('/'.join([self._topic_prefix, 'status']), payload='timeout', qos=0, retain=True)
                         self._client.connect(self._hostname, port=31883)
                         break
                 except:
                         log.info("reconnecting in 10")
                         time.sleep(10)
+        self._client.loop_start()                                                
         print('MQTTWriter connected to '+self._hostname)
 
     def _on_connect(self, client, userdata, flags, rc):
