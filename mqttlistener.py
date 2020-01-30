@@ -87,7 +87,7 @@ class MqttWriter(BaseIOHandler, BufferedReader):
                         self._client.on_disconnect = self._on_disconnect
                         self._client.on_message = self._on_message
                         self._client.on_log = lambda mqttc, obj, level, string: print(string)
-                        self._client.enable_logger()
+                        #self._client.enable_logger()
                         self._client.username_pw_set(username=self._user, password=self._password)
                         self._client.reconnect_delay_set(min_delay=1, max_delay=120)
                         self._client.will_set('/'.join([self._topic_prefix, 'status']), payload='timeout', qos=0, retain=True)
@@ -123,25 +123,24 @@ class MqttWriter(BaseIOHandler, BufferedReader):
 
                 msg = self.get_message(self.GET_MESSAGE_TIMEOUT)
                 #print(str(msg))
-                while msg is not None:
-                    # log.debug("SqliteWriter: buffering message")
-                    msgname = self._db.get_message_by_frame_id(msg.arbitration_id).name
+
+                msgname = self._db.get_message_by_frame_id(msg.arbitration_id).name
+                try:
+                    decoded = self._db.decode_message(msg.arbitration_id, msg.data)
+                except:
+                    log.info("not found in db: "+str(msg.arbitration_id))
+                    break
+                for signal in decoded:
                     try:
-                        decoded = self._db.decode_message(msg.arbitration_id, msg.data)
+                        retval = self._client.publish('/'.join([self._topic_prefix, msgname, signal]), payload=decoded[signal], qos=0, retain=False)
+                        if (retval.rc == mqtt.MQTT_ERR_SUCCESS):
+                            self.num_frames += 1
+                        elif (retval.rc == mqtt.ERR_NO_CONN):
+                            self._connect() #message lost?
+                        else:
+                            print('pub failed with'+str(rc))
                     except:
-                        log.info("not found in db: "+str(msg.arbitration_id))
-                        break
-                    for signal in decoded:
-                        try:
-                            retval = self._client.publish('/'.join([self._topic_prefix, msgname, signal]), payload=decoded[signal], qos=0, retain=False)
-                            if (retval.rc == mqtt.MQTT_ERR_SUCCESS):
-                                self.num_frames += 1
-                            elif (retval.rc == mqtt.ERR_NO_CONN):
-                                self._connect() #message lost?
-                            else:
-                                print('pub failed with'+str(rc))
-                        except:
-                            print('exception in publish')
+                        print('exception in publish')
                 # check if we are still supposed to run and go back up if yes
                 if self._stop_running_event.is_set():
                     break
