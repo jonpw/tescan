@@ -87,11 +87,10 @@ class MqttWriter(BaseIOHandler, BufferedReader):
                         self._client.on_disconnect = self._on_disconnect
                         self._client.on_message = self._on_message
                         self._client.on_log = lambda mqttc, obj, level, string: print(string)
-                        #self._client.enable_logger()
+                        self._client.disable_logger()
                         self._client.username_pw_set(username=self._user, password=self._password)
                         self._client.reconnect_delay_set(min_delay=1, max_delay=120)
                         self._client.will_set('/'.join([self._topic_prefix, 'status']), payload='timeout', qos=0, retain=True)
-                        print('.')
                         self._client.connect(self._hostname, port=31883)
                         break
                 except:
