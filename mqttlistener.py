@@ -45,8 +45,11 @@ class MqttWriter(BaseIOHandler, BufferedReader):
     .. note:: The database schema is given in the documentation of the loggers.
     """
 
+    GET_MESSAGE_TIMEOUT = 0.25
+    """Number of seconds to wait for messages from internal queue"""
+
     def __init__(self, hostname,\
-                 database_file='Model3CAN.dbc',\
+                 database_file='model3dbc/Model3CAN.dbc',\
                  vehicle='mycar',\
                  user='mycar',\
                  password='mycar'):
@@ -91,6 +94,7 @@ class MqttWriter(BaseIOHandler, BufferedReader):
                 except:
                         log.info("reconnecting in 10")
                         time.sleep(10)
+        print('MQTTWriter connected to '+self._hostname)
 
     def _on_connect(self, client, userdata, flags, rc):
         print("Connection returned result: "+connack_string(rc))
@@ -135,7 +139,8 @@ class MqttWriter(BaseIOHandler, BufferedReader):
                 # check if we are still supposed to run and go back up if yes
                 if self._stop_running_event.is_set():
                     break
-
+        except:
+            print('mqtt_publisher_thread: exception')
         finally:
             self._client.disconnect()
             log.info("Stopped mqtt publisher after writing %d messages", self.num_frames)

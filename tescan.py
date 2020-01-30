@@ -18,7 +18,7 @@ mqttwriter = MqttWriter(hostname, vehicle=vehicle, user=user, password=password,
 
 while True:
     message = bus.recv()
-    printer(message)
-    sqlitewriter(message)
-    influxwriter(message)
+    #printer(message)
+    #sqlitewriter(message)
+    #influxwriter(message)
     mqttwriter(message)
