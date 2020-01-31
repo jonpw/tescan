@@ -1,0 +1,14 @@
+[Unit]
+Description=Tesla CAN recorder
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=pi
+ExecStart=/var/lib/tescan/tescan.sh
+
+[Install]
+WantedBy=multi-user.target
