@@ -123,6 +123,8 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                     for name in decoded.keys():
                         if basemsg.get_signal_by_name(name)._choices:
                             decoded[name] = str(decoded[name])
+                        if decoded[name] == 'SNA':
+                            del decoded[name]
                     json_message["fields"].update(decoded)
                     messages.append(json_message)
                     if (
