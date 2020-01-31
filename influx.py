@@ -146,8 +146,8 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                         #print(message.timestamp)
                         print(e.content)
                         print(e.code)
-                        if e.content['error'].find('partial write') == 0:
-                            print(e.content['error'].split('\"')[1])
+                        if e.content.find('partial write') > 0:
+                            print(e.content.split('\\\"')[1])
                         else:
                             print(str(messages))
                         traceback.print_exc()
