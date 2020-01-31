@@ -144,9 +144,10 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                     except ifxexcept.InfluxDBClientError as e:
                         #print(str(message))
                         #print(message.timestamp)
-                        print(dir(e))
-                        if e.strerror.find('partial write') == 0:
-                            print(e.strerror.split('\"')[1])
+                        print(e.content)
+                        print(e.code)
+                        if e.content.find('partial write') == 0:
+                            print(e.content.split('\"')[1])
                         else:
                             print(str(messages))
                         traceback.print_exc()
