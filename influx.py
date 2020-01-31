@@ -141,10 +141,13 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                     # log.debug("Writing %d frames to db", count)
                     try:
                         self._client.write_points(messages)
-                    except ifxexcept.InfluxDBClientError:
+                    except ifxexcept.InfluxDBClientError as e:
                         #print(str(message))
                         #print(message.timestamp)
-                        print(str(messages))
+                        if e['error'].find('partial write') == 0:
+                            print(e['error'].split('\"')[1])
+                        else:
+                            print(str(messages))
                         traceback.print_exc()
                     except ifxexcept.InfluxDBServerError:
                         self._client.close()
