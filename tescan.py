@@ -7,7 +7,7 @@ candev='vcan0'
 printonly=False
 
 try:
-    opts, args = getopt.getopt(argv,"hb:p")
+    opts, args = getopt.getopt(sys.argv[1:],"hb:p")
 except getopt.GetoptError:
     print('tescan.py -b <can device>')
     sys.exit(2)
