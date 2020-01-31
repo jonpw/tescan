@@ -117,8 +117,12 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                     except:
                         log.info("not found in db: "+str(msg.arbitration_id))
                         break
-                    json_message = self._one_json(self._db.get_message_by_frame_id(msg.arbitration_id).name)
+                    basemsg = self._db.get_message_by_frame_id(msg.arbitration_id)
+                    json_message = self._one_json(basemsg.name)
                     json_message["time"] = int(msg.timestamp*1000)
+                    for name in decoded.keys():
+                        if basemsg.get_signal_by_name(name)._choices:
+                            decoded[name] = str(decoded[name])
                     json_message["fields"].update(decoded)
                     messages.append(json_message)
                     if (
