@@ -45,16 +45,18 @@ sqlitefile = '/var/lib/tescan/canbus.'+str(time.time_ns())+'.sqlite'
 
 if doprint:
     printer = can.Printer()
-if not printonly:
+if doupload:
     influxwriter = InfluxWriter(hostname, database=vehicle, measurement_name=vehicle, user=user, password=password, database_file=database_file)
-    sqlitewriter = can.SqliteWriter(sqlitefile, table_name=vehicle)
     mqttwriter = MqttWriter(hostname, vehicle=vehicle, user=user, password=password, database_file=database_file)
+if dolog:
+    sqlitewriter = can.SqliteWriter(sqlitefile, table_name=vehicle)
 
 while True:
     message = bus.recv()
     if doprint:
         printer(message)
-    if not printonly:
+    if dolog:
         sqlitewriter(message)
+    if doupload:
         influxwriter(message)
         mqttwriter(message)
