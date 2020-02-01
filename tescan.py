@@ -5,11 +5,12 @@ from mqttlistener import MqttWriter
 import time
 
 candev='vcan0'
-printonly=False
 doprint=True
+doupload=True
+dolog=True
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:],"hdb:p")
+    opts, args = getopt.getopt(sys.argv[1:],"hdlb:p")
 except getopt.GetoptError:
     print('tescan.py -b <can device>')
     sys.exit(2)
@@ -20,9 +21,17 @@ for opt, arg in opts:
     elif opt in ("-b"):
         candev = arg
     elif opt in ("-p"):
-        printonly=True
+        doprint=True
+        dolog=False
+        doupload=False
     elif opt in ("-d"):
         doprint=False
+        doupload=True
+        dolog=True
+    elif opt in ("-l"):
+        doprint=False
+        doupload=False
+        dolog=True
 print('Using bus '+candev)
 
 bus = can.Bus(bustype='socketcan', channel=candev, bitrate=500000, receive_own_messages=True, listen_only=True)
