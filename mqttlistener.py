@@ -120,12 +120,12 @@ class MqttWriter(BaseIOHandler, BufferedReader):
             while True:
                 msg = self.get_message(self.GET_MESSAGE_TIMEOUT)
                 if msg is not None:
-                    msgname = self._db.get_message_by_frame_id(msg.arbitration_id).name
                     try:
+                        msgname = self._db.get_message_by_frame_id(msg.arbitration_id).name
                         decoded = self._db.decode_message(msg.arbitration_id, msg.data)
                     except:
-                        log.info("not found in db: "+str(msg.arbitration_id))
-                        traceback.print_exc()
+                        print("not found in db: "+str(msg.arbitration_id))
+                        #traceback.print_exc()
                     for signal in decoded:
                         try:
                             retval = self._client.publish('/'.join([self._topic_prefix, msgname, signal]), payload=decoded[signal], qos=0, retain=False)
