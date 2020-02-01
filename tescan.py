@@ -2,6 +2,7 @@ import can
 import sys, getopt
 from influx import InfluxWriter
 from mqttlistener import MqttWriter
+import time
 
 candev='vcan0'
 printonly=False
@@ -31,7 +32,7 @@ vehicle = 'maximus'
 user = vehicle
 password = 'campari'
 database_file='model3dbc/Model3CAN.dbc'
-sqlitefile = '/var/lib/tescan/canbus.sqlite'
+sqlitefile = '/var/lib/tescan/canbus.'+str(time.time_ns())+'.sqlite'
 
 if doprint:
     printer = can.Printer()
