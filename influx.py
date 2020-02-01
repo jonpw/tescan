@@ -146,10 +146,13 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                         #print(message.timestamp)
                         print(e.content)
                         print(e.code)
-                        if e.content.find('partial write') > 0:
-                            print(e.content.split('\\\"')[1])
-                        else:
-                            print(str(messages))
+                        try:
+                            if e.content.find('partial write') > 0:
+                                print(e.content.split('\\\"')[1])
+                            else:
+                                print(str(messages))
+                        except:
+                                print(str(messages))
                         traceback.print_exc()
                     except ifxexcept.InfluxDBServerError:
                         self._client.close()
