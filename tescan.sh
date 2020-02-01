@@ -3,6 +3,7 @@
 cd /var/lib/tescan
 git pull
 git submodule update
+chmod 777 tescan.sh
 while [ 1 ]
 do
 	touch /tmp/tescan.start
