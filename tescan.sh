@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd /var/lib/tescan
+git reset --hard
 git pull
 git submodule update
 chmod 777 tescan.sh
