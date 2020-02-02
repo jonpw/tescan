@@ -140,7 +140,7 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                 if count > 0:
                     # log.debug("Writing %d frames to db", count)
                     try:
-                        self._client.write_points(messages)
+                        self._client.write_points(messages, time_precision='ms')
                     except ifxexcept.InfluxDBClientError as e:
                         #print(str(message))
                         #print(message.timestamp)
