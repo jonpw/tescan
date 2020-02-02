@@ -41,7 +41,7 @@ vehicle = 'maximus'
 user = vehicle
 password = 'campari'
 database_file='model3dbc/Model3CAN.dbc'
-sqlitefile = '/var/lib/tescan/canbus.'+str(time.time_ns())+'.sqlite'
+sqlitefile = '/var/lib/tescanlogs/canbus.'+str(time.time_ns())+'.sqlite'
 
 if doprint:
     printer = can.Printer()
