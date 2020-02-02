@@ -26,5 +26,6 @@ do
 	sudo ip link set up ${candev} && \
 	touch /tmp/tescan.run &&
 	python3 tescan.py -b ${candev}
+	echo Restarting
 	sleep 60
 done
