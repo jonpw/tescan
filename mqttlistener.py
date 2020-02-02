@@ -125,11 +125,10 @@ class MqttWriter(BaseIOHandler, BufferedReader):
                         msgname = self._db.get_message_by_frame_id(msg.arbitration_id).name
                         decoded = self._db.decode_message(msg.arbitration_id, msg.data)
                     except:
-                        print("not found in db: "+str(msg.arbitration_id))
-                        msgname = "IDx"+str(msg.arbitration_id)
-                        print(str(msg))
-                        for signal in msg:
-                            print(str(signal))
+                        #print("not found in db: "+str(msg.arbitration_id))
+                        msgname = "unknown/ID"+str(msg.arbitration_id)
+                        #print(str(msg))
+                        decoded["data"]=':'.join([msg.dlc, msg.data, msg.is_extended_id, msg.is_error_frame, msg.is_remote_frame])
                     for signal in decoded:
                         try:
                             retval = self._client.publish('/'.join([self._topic_prefix, msgname, signal]), payload=decoded[signal], qos=0, retain=False)
