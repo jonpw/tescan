@@ -101,12 +101,12 @@ class MqttWriter(BaseIOHandler, BufferedReader):
         print('MQTTWriter connected to '+self._hostname)
 
     def _on_connect(self, client, userdata, flags, rc):
-        print("Connection returned result: "+connack_string(rc))
+        print("MQTT Connection returned result: "+connack_string(rc))
         retval = self._client.publish('/'.join([self._topic_prefix, 'status']), payload='running', qos=0, retain=True)
 
     def _on_disconnect(self, client, userdata, rc):
         if rc != 0:
-            print("Unexpected disconnection.")
+            print("MQTT Unexpected disconnection.")
 
     def _on_message(self, client, userdata, message):
         print("Received message '" + str(message.payload) + "' on topic '"
@@ -137,19 +137,19 @@ class MqttWriter(BaseIOHandler, BufferedReader):
                             elif (retval.rc == mqtt.MQTT_ERR_NO_CONN):
                                 self._connect() #message lost?
                             else:
-                                print('pub failed with'+str(rc))
+                                print('MQTT pub failed with'+str(rc))
                         except:
-                            print('exception in publish')
+                            print('MQTT exception in publish')
                             traceback.print_exc()
                 # check if we are still supposed to run and go back up if yes
                 if self._stop_running_event.is_set():
                     break
         except:
-            print('mqtt_publisher_thread: exception')
+            print('MQTT exception')
             traceback.print_exc()
         finally:
             self._client.disconnect()
-            log.info("Stopped mqtt publisher after writing %d messages", self.num_frames)
+            log.info("MQTT Stopped mqtt publisher after writing %d messages", self.num_frames)
 
     def stop(self):
         """Stops the reader an writes all remaining messages to the database. Thus, this
