@@ -21,9 +21,11 @@ do
 		continue
 	fi
 	touch /tmp/tescan.start
+	sudo ip link set down ${candev} &&
 	sudo ip link set ${candev} type can bitrate 500000 listen-only on && \
 	sudo ip link set up ${candev} && \
 	touch /tmp/tescan.run &&
 	python3 tescan.py -b ${candev}
+	echo Restarting
 	sleep 60
 done

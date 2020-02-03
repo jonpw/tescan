@@ -120,18 +120,21 @@ class MqttWriter(BaseIOHandler, BufferedReader):
             while True:
                 msg = self.get_message(self.GET_MESSAGE_TIMEOUT)
                 if msg is not None:
+                    decoded = {}
                     try:
                         msgname = self._db.get_message_by_frame_id(msg.arbitration_id).name
                         decoded = self._db.decode_message(msg.arbitration_id, msg.data)
                     except:
-                        print("not found in db: "+str(msg.arbitration_id))
-                        #traceback.print_exc()
+                        #print("not found in db: "+str(msg.arbitration_id))
+                        msgname = "ID"+hex(msg.arbitration_id)[2:].upper()
+                        #print(str(msg))
+                        decoded["unknown"]=','.join([str(x) for x in [msg.data.hex(), msg.is_extended_id, msg.is_error_frame, msg.is_remote_frame]])
                     for signal in decoded:
                         try:
                             retval = self._client.publish('/'.join([self._topic_prefix, msgname, signal]), payload=decoded[signal], qos=0, retain=False)
                             if (retval.rc == mqtt.MQTT_ERR_SUCCESS):
                                 self.num_frames += 1
-                            elif (retval.rc == mqtt.ERR_NO_CONN):
+                            elif (retval.rc == mqtt.MQTT_ERR_NO_CONN):
                                 self._connect() #message lost?
                             else:
                                 print('pub failed with'+str(rc))
