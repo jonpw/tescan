@@ -121,7 +121,7 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                     json_message = self._one_json(basemsg.name)
                     json_message["time"] = int(msg.timestamp*1000)
                     for name in list(decoded):
-                        if basemsg.get_signal_by_name(name)._choices:
+                        if len([basemsg.get_signal_by_name(name)._choices]) > 1:
                             decoded[name] = str(decoded[name])
                         if decoded[name] == 'SNA':
                             del decoded[name]
