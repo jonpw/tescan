@@ -134,7 +134,7 @@ class MqttWriter(BaseIOHandler, BufferedReader):
                             retval = self._client.publish('/'.join([self._topic_prefix, msgname, signal]), payload=decoded[signal], qos=0, retain=False)
                             if (retval.rc == mqtt.MQTT_ERR_SUCCESS):
                                 self.num_frames += 1
-                            elif (retval.rc == mqtt.ERR_NO_CONN):
+                            elif (retval.rc == mqtt.MQTT_ERR_NO_CONN):
                                 self._connect() #message lost?
                             else:
                                 print('pub failed with'+str(rc))
