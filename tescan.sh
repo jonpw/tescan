@@ -13,10 +13,13 @@ do
 	then
 		candev=vcan0
 		modprobe vcan
-		sudo ip link add dev vcan0 type vcan
+		sudo ip link add dev vcan0 type vcan && \
+		sudo ip link set up ${candev}
 	elif [ "${myssid}" == "jnet" ]
 	then
 		candev=can0
+		sudo ip link set down ${candev}
+		sudo ip link set ${candev} type can bitrate 500000 listen-only on
 	elif [ "${myssid}" == "" ]
 	then
 		sleep 10
@@ -25,10 +28,6 @@ do
 		echo ${myssid} unknown
 		continue
 	fi
-	touch /tmp/tescan.start
-	sudo ip link set down ${candev}
-	sudo ip link set ${candev} type can bitrate 500000 listen-only on && \
-	sudo ip link set up ${candev} && \
 	touch /tmp/tescan.run &&
 	python3 tescan.py -b ${candev}
 	echo Restarting
