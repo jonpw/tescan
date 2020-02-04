@@ -70,7 +70,7 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
         """
         super().__init__(file=None)
         self._hostname = hostname
-        self._database = database #+str(time.time_ns())
+        self._database = database+str(time.time_ns())
         self._measurement_name = measurement_name
         self._user = user
         self._password = password
