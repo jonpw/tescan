@@ -7,13 +7,14 @@ git submodule update
 chmod 777 tescan.sh
 while [ 1 ]
 do
-	myssid=$(iwgetid -r)
-	candev=can0
+	myssid="$(iwgetid -r)"
+	candev="can0"
+	options=""
 	if [ "${myssid}" == "Telstra565C60" ]
 	then
 		candev=vcan0
 		modprobe vcan
-		sudo ip link add dev vcan0 type vcan && \
+		sudo ip link add dev ${candev} type vcan && \
 		sudo ip link set up ${candev}
 		options="-t"
 	elif [ "${myssid}" == "jnet" ]
