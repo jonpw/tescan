@@ -19,6 +19,9 @@ do
 	then
 		sleep 10
 		continue
+	else
+		echo ${myssid} unknown
+		continue
 	fi
 	touch /tmp/tescan.start
 	sudo ip link set down ${candev} &&
