@@ -15,6 +15,7 @@ do
 		modprobe vcan
 		sudo ip link add dev vcan0 type vcan && \
 		sudo ip link set up ${candev}
+		options="-t"
 	elif [ "${myssid}" == "jnet" ]
 	then
 		candev=can0
@@ -29,7 +30,7 @@ do
 		continue
 	fi
 	touch /tmp/tescan.run &&
-	python3 tescan.py -b ${candev}
+	python3 tescan.py -b ${candev} ${options}
 	echo Restarting
 	sleep 60
 done
