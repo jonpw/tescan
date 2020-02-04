@@ -12,6 +12,7 @@ do
 	if [ "${myssid}" == "Telstra565C60" ]
 	then
 		candev=vcan0
+		sudo ip link add dev vcan0 type vcan
 	elif [ "${myssid}" == "jnet" ]
 	then
 		candev=can0
