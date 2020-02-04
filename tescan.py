@@ -8,9 +8,10 @@ candev='vcan0'
 doprint=True
 doupload=True
 dolog=True
+vehicle = 'maximus'
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:],"hdlb:p")
+    opts, args = getopt.getopt(sys.argv[1:],"thdlb:p")
 except getopt.GetoptError:
     print('tescan.py -b <can device>')
     sys.exit(2)
@@ -28,6 +29,11 @@ for opt, arg in opts:
         doprint=False
         doupload=True
         dolog=True
+    elif opt in ("-t"):
+        doprint=True
+        doupload=True
+        dolog=True        
+        vehicle='maximustest'
     elif opt in ("-l"):
         doprint=False
         doupload=False
@@ -37,8 +43,7 @@ print('Using bus '+candev)
 bus = can.Bus(bustype='socketcan', channel=candev, bitrate=500000, receive_own_messages=True, listen_only=True)
 
 hostname = '701.insi.dev'
-vehicle = 'maximus'
-user = vehicle
+user = 'maximus'
 password = 'campari'
 database_file='model3dbc/Model3CAN.dbc'
 sqlitefile = '/var/lib/tescanlogs/canbus.'+str(time.time_ns())+'.sqlite'
