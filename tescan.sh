@@ -22,6 +22,7 @@ do
 		candev=can0
 		sudo ip link set down ${candev}
 		sudo ip link set ${candev} type can bitrate 500000 listen-only on
+		sudo ip link set up ${candev}
 	elif [ "${myssid}" == "" ]
 	then
 		sleep 10
