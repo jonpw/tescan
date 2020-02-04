@@ -9,13 +9,13 @@ while [ 1 ]
 do
 	myssid=$(iwgetid -r)
 	candev=can0
-	if [ myssid == "Telstra565C60" ]
+	if [ "${myssid}" == "Telstra565C60" ]
 	then
 		candev=vcan0
-	elif [ myssid == "jnet" ]
+	elif [ "${myssid}" == "jnet" ]
 	then
 		candev=can0
-	elif [ myssid == "" ]
+	elif [ "${myssid}" == "" ]
 	then
 		sleep 10
 		continue
