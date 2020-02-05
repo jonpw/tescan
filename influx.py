@@ -160,6 +160,7 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
 
                     self.num_frames += count
                     self.last_write = time.time()
+                    print('influx: '+str(time.time())+' wrote '+str(count))
 
                 # check if we are still supposed to run and go back up if yes
                 if self._stop_running_event.is_set():
