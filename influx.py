@@ -92,13 +92,13 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
         """
         log.debug("Creating sqlite database")
         while True:
-                try:
-                        self._client = InfluxDBClient(self._hostname, 38086, self._user, self._password, self._database)
-                        self._client.create_database(self._database)
-                        break
-                except:
-                        log.info("reconnecting in 10")
-                        time.sleep(10)
+            try:
+                self._client = InfluxDBClient(self._hostname, 38086, self._user, self._password, self._database)
+                self._client.create_database(self._database)
+                break
+            except:
+                log.info("reconnecting in 10")
+                time.sleep(10)
         print('connected to '+str(self._hostname))
 
     def _influx_writer_thread(self):
