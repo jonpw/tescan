@@ -106,7 +106,7 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
 
         try:
             while True:
-                #messages = []  # reset buffer
+                messages = []  # reset buffer
 
                 msg = self.get_message(self.GET_MESSAGE_TIMEOUT)
                 #print(str(msg))
