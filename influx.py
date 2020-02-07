@@ -155,7 +155,7 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                                 print(str(messages))
                         except:
                                 print(str(messages))
-                        traceback.print_exc()
+                        #traceback.print_exc()
                     except ifxexcept.InfluxDBServerError:
                         self._client.close()
                         self._connect()
