@@ -118,7 +118,6 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                     except:
                         log.info("not found in db: "+str(msg.arbitration_id))
                         process = False
-                        break
                     if process:
                         basemsg = self._db.get_message_by_frame_id(msg.arbitration_id)
                         json_message = self._one_json(basemsg.name)
