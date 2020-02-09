@@ -16,10 +16,11 @@ import traceback
 from can.listener import BufferedReader
 from can.message import Message
 from can.io.generic import BaseIOHandler
+from listener import SmartBufferedReader
 
 log = logging.getLogger("can.io.influxdb")
 
-class InfluxWriter(BaseIOHandler, BufferedReader):
+class InfluxWriter(BaseIOHandler, SmartBufferedReader):
     """Writes decoded CAN bus data to an InfluxDB server
     The database will be created when connecting
     Messages are internally buffered and written in a background
@@ -162,7 +163,7 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
 
                     self.num_frames += count
                     self.last_write = time.time()
-                    print('influx: '+str(time.time())+' wrote '+str(count))
+                    print('influx: '+str(time.time())+' wrote '+str(count)+' buffer at '+str(self.get_buffer_length()))
 
                 # check if we are still supposed to run and go back up if yes
                 if self._stop_running_event.is_set():

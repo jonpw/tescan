@@ -63,5 +63,11 @@ while True:
     if dolog:
         sqlitewriter(message)
     if doupload:
-        influxwriter(message)
-        mqttwriter(message)
+        if influxwriter.buffer_is_full():
+            print("influxwriter buffer full")
+        else:
+            influxwriter(message)
+        if mqttwriter.buffer_is_full():
+            print("mqttwriter buffer is full)")
+        else:
+            mqttwriter(message)

@@ -15,10 +15,11 @@ from can.listener import BufferedReader
 from can.message import Message
 from can.io.generic import BaseIOHandler
 import paho.mqtt.client as mqtt
+from listener import SmartBufferedReader
 
-log = logging.getLogger("can.io.influxdb")
+log = logging.getLogger("can.io.mqttdb")
 
-class MqttWriter(BaseIOHandler, BufferedReader):
+class MqttWriter(BaseIOHandler, SmartBufferedReader):
     """Writes decoded CAN bus data to an InfluxDB server
     The database will be created when connecting
     Messages are internally buffered and written in a background
