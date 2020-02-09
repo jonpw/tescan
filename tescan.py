@@ -40,7 +40,7 @@ for opt, arg in opts:
         dolog=True
 print('Using bus '+candev)
 
-bus = can.Bus(bustype='socketcan', channel=candev, bitrate=500000, receive_own_messages=True, listen_only=True)
+bus = can.Bus(bustype='socketcan', channel=candev, bitrate=500000, listen_only=True)
 
 hostname = '701.insi.dev'
 user = 'maximus'

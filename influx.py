@@ -46,7 +46,7 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
     .. note:: The database schema is given in the documentation of the loggers.
     """
 
-    GET_MESSAGE_TIMEOUT = 0.25
+    GET_MESSAGE_TIMEOUT = 1
     """Number of seconds to wait for messages from internal queue"""
 
     MAX_TIME_BETWEEN_WRITES = 5.0
@@ -114,19 +114,21 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                     # log.debug("SqliteWriter: buffering message")
                     try:
                         decoded = self._db.decode_message(msg.arbitration_id, msg.data)
+                        process = True
                     except:
                         log.info("not found in db: "+str(msg.arbitration_id))
-                        break
-                    basemsg = self._db.get_message_by_frame_id(msg.arbitration_id)
-                    json_message = self._one_json(basemsg.name)
-                    json_message["time"] = int(msg.timestamp*1000)
-                    for name in list(decoded):
-                        #if len([basemsg.get_signal_by_name(name)._choices]) > 1:
-                        #    decoded[name] = str(decoded[name])
-                        if decoded[name] == 'SNA':
-                            del decoded[name]
-                    json_message["fields"].update(decoded)
-                    messages.append(json_message)
+                        process = False
+                    if process:
+                        basemsg = self._db.get_message_by_frame_id(msg.arbitration_id)
+                        json_message = self._one_json(basemsg.name)
+                        json_message["time"] = int(msg.timestamp*1000)
+                        for name in list(decoded):
+                            #if len([basemsg.get_signal_by_name(name)._choices]) > 1:
+                            #    decoded[name] = str(decoded[name])
+                            if decoded[name] == 'SNA':
+                                del decoded[name]
+                        json_message["fields"].update(decoded)
+                        messages.append(json_message)
                     if (
                         time.time() - self.last_write > self.MAX_TIME_BETWEEN_WRITES
                         or len(messages) > self.MAX_BUFFER_SIZE_BEFORE_WRITES
@@ -153,7 +155,7 @@ class InfluxWriter(BaseIOHandler, BufferedReader):
                                 print(str(messages))
                         except:
                                 print(str(messages))
-                        traceback.print_exc()
+                        #traceback.print_exc()
                     except ifxexcept.InfluxDBServerError:
                         self._client.close()
                         self._connect()
