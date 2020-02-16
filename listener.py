@@ -13,10 +13,10 @@ class SmartBufferedReader(BufferedReader):
         	else:
         		pass
 
-    def buffer_is_empty():
+    def buffer_is_empty(self):
     	return self.buffer.empty()
 
-    def buffer_is_full():
+    def buffer_is_full(self):
     	return (self.buffer.qsize() >= MAX_BUFFER_SIZE)
 
     def get_buffer_length(self):
