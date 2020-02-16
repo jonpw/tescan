@@ -8,7 +8,7 @@ class SmartBufferedReader(BufferedReader):
         if self.is_stopped:
             raise RuntimeError("reader has already been stopped")
         else:
-        	if self.buffer.qsize() < MAX_BUFFER_SIZE:
+        	if self.buffer.qsize() < self.MAX_BUFFER_SIZE:
         		self.buffer.put(msg)
         	else:
         		pass
@@ -17,7 +17,7 @@ class SmartBufferedReader(BufferedReader):
     	return self.buffer.empty()
 
     def buffer_is_full(self):
-    	return (self.buffer.qsize() >= MAX_BUFFER_SIZE)
+    	return (self.buffer.qsize() >= self.MAX_BUFFER_SIZE)
 
     def get_buffer_length(self):
     	return self.buffer.qsize()
