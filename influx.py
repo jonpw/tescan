@@ -58,7 +58,6 @@ class InfluxWriter(BaseIOHandler, SmartBufferedReader):
 
     def __init__(self, hostname,\
                  measurement_name="test",\
-                 database_file='Model3CAN.dbc',\
                  database='mycar',\
                  user='mycar',\
                  password='mycar'):
@@ -78,7 +77,6 @@ class InfluxWriter(BaseIOHandler, SmartBufferedReader):
         self._influxdb_host = hostname
         self._stop_running_event = threading.Event()
         self._client = None
-        self._db = cantools.database.load_file(database_file)
         self.num_frames = 0
         self.last_write = time.time()
         self._one_json = lambda message:{ "measurement": self._measurement_name, "tags": {"message": message}, "time": None, "fields": {}}        
@@ -113,22 +111,14 @@ class InfluxWriter(BaseIOHandler, SmartBufferedReader):
                 #print(str(msg))
                 while msg is not None:
                     # log.debug("SqliteWriter: buffering message")
-                    try:
-                        decoded = self._db.decode_message(msg.arbitration_id, msg.data)
-                        process = True
-                    except:
-                        log.info("not found in db: "+str(msg.arbitration_id))
-                        process = False
-                    if process:
-                        basemsg = self._db.get_message_by_frame_id(msg.arbitration_id)
-                        json_message = self._one_json(basemsg.name)
-                        json_message["time"] = int(msg.timestamp*1000)
-                        for name in list(decoded):
+                        json_message = msg["name"]
+                        json_message["time"] = int(msg["msg"].timestamp*1000)
+                        for name in list(msg["msg"]):
                             #if len([basemsg.get_signal_by_name(name)._choices]) > 1:
                             #    decoded[name] = str(decoded[name])
-                            if decoded[name] == 'SNA':
+                            if msg["msg"][name] == 'SNA': # signal not available
                                 del decoded[name]
-                        json_message["fields"].update(decoded)
+                        json_message["fields"].update(msg["msg"])
                         messages.append(json_message)
                     if (
                         time.time() - self.last_write > self.MAX_TIME_BETWEEN_WRITES

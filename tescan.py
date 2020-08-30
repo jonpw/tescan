@@ -2,6 +2,7 @@ import can
 import sys, getopt
 from influx import InfluxWriter
 from mqttlistener import MqttWriter
+from decodelistener import DecodeListener
 import time
 
 candev='vcan0'
@@ -51,17 +52,20 @@ sqlitefile = '/var/lib/tescanlogs/canbus.'+str(time.time_ns())+'.sqlite'
 if doprint:
     printer = can.Printer()
 if doupload:
-    influxwriter = InfluxWriter(hostname, database=vehicle, measurement_name=vehicle, user=user, password=password, database_file=database_file)
-    mqttwriter = MqttWriter(hostname, vehicle=vehicle, user=user, password=password, database_file=database_file)
+    influxwriter = InfluxWriter(hostname, database=vehicle, measurement_name=vehicle, user=user, password=password)
+    mqttwriter = MqttWriter(hostname, vehicle=vehicle, user=user, password=password)
 if dolog:
     sqlitewriter = can.SqliteWriter(sqlitefile, table_name=vehicle)
+decodelistener = DecodeListener(database_file=database_file)
 
 while True:
     message = bus.recv()
+    decodelistener(message)
     if doprint:
         printer(message)
     if dolog:
         sqlitewriter(message)
+    
     if doupload:
         if influxwriter.buffer_is_full():
             print("influxwriter buffer full")
